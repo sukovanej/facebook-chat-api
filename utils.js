@@ -18,6 +18,13 @@ function getHeaders(url, options) {
   return headers;
 }
 
+function getRequest(options) {
+  if (options.proxy === undefined) {
+    return request;
+  }
+  return request.defaults({'proxy': options.proxy})
+}
+
 function isReadableStream(obj) {
   return (
     obj instanceof stream.Stream &&
@@ -46,7 +53,7 @@ function get(url, jar, qs, options) {
     gzip: true
   };
 
-  return request(op).then(function(res) {
+  return getRequest(options)(op).then(function(res) {
     return res[0];
   });
 }
@@ -62,7 +69,7 @@ function post(url, jar, form, options) {
     gzip: true
   };
 
-  return request(op).then(function(res) {
+  return getRequest(options)(op).then(function(res) {
     return res[0];
   });
 }
@@ -81,7 +88,7 @@ function postFormData(url, jar, form, qs, options) {
     gzip: true
   };
 
-  return request(op).then(function(res) {
+  return getRequest(options)(op).then(function(res) {
     return res[0];
   });
 }

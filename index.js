@@ -42,6 +42,9 @@ function setOptions(globalOptions, options) {
       case 'autoMarkRead':
         globalOptions.autoMarkRead = options.autoMarkRead;
         break;
+      case 'proxy':
+        globalOptions.proxy = options.proxy;
+        break;
       default:
         log.warn("setOptions", "Unrecognized option given to setOptions: " + key);
         break;
